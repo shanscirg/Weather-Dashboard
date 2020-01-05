@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4 text-center">Weather Dashboard</h1>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <form>
+                    <div class="form-group">
+                        <label for="citySearch">Search for a City:</label>
+                        <input type="text" class="form-control" id="cityChoice"></input>
+                        <button type="submit" id="submitCity"><img
+                                src="https://library.kissclipart.com/20180830/bxe/kissclipart-clip-art-magnifying-glass-clipart-magnifying-glass-194c749105f41a77.png"></button>
+                    </div>
+                </form>
+                <div id="savedSearches">This is where saved searches will go!
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="row">
+                    <p class="text-center">This will be where current weather results show up!</p>
+                </div>
+                <div class="row">
+                    <p class="text-center">5-Day Forecast</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
