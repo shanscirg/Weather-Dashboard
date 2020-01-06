@@ -29,7 +29,7 @@
                         <label for="citySearch">Search for a City:</label>
                         <input type="text" class="form-control" id="cityChoice"></input>
                         <button type="submit" id="submitCity"><img
-                                src="https://library.kissclipart.com/20180830/bxe/kissclipart-clip-art-magnifying-glass-clipart-magnifying-glass-194c749105f41a77.png"></button>
+                                src="https://library.kissclipart.com/20180830/bxe/kissclipart-clip-art-magnifying-glass-clipart-magnifying-glass-194c749105f41a77.png" style="height: 25px; width: 25px"></button>
                     </div>
                 </form>
                 <div id="savedSearches"></div>
@@ -37,22 +37,22 @@
 
             <div class="col-md-9 pl-4">
                 <div class="row border border-primary w-auto h-50">
-                    <h1 class="p-3 w-75" style="height: 5px" id="cityName">&lt;--- Search for a city to see current weather!</h1>
+                    <h1 class="p-3 w-75" style="height: 5px" id="cityName">&lt;--- Search for a city to get weather information!</h1>
                     <p id="space"></p>
                     <p class="p-3 w-75" style="height: 5px" id="temp"></p>
                     <p class="p-3 w-75" style="height: 5px" id="humidity"></p>
                     <p class="p-3 w-75" style="height: 5px" id="wind"></p>
                     <p class="p-3 w-75" style="height: 5px" id="uvIndex"></p>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-4" id="fiveDay">
                     <h1>5-Day Forecast:</h1>
                 </div>
-                <div class="row">
+                <div class="row" id="cards">
                     <div class="col-md-2.4 p-1">
                         <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
                             <div class="card-header" id="nextDay1"></div>
                             <div class="card-body">
-                                <h5 class="card-title">[Weather Image]</h5>
+                                <h5 class="card-title" id="img1"></h5>
                                 <p class="card-text" id="temp1"></p>
                                 <p class="card-text" id="humidity1"></p>
                             </div>
@@ -62,7 +62,7 @@
                         <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
                             <div class="card-header" id="nextDay2"></div>
                             <div class="card-body">
-                                <h5 class="card-title">[Weather Image]</h5>
+                                <h5 class="card-title" id="img2"></h5>
                                 <p class="card-text" id="temp2"></p>
                                 <p class="card-text" id="humidity2"></p>
                             </div>
@@ -72,7 +72,7 @@
                         <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
                             <div class="card-header" id="nextDay3"></div>
                             <div class="card-body">
-                                <h5 class="card-title">[Weather Image]</h5>
+                                <h5 class="card-title" id="img3"></h5>
                                 <p class="card-text" id="temp3"></p>
                                 <p class="card-text" id="humidity3"></p>
                             </div>
@@ -82,7 +82,7 @@
                         <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
                             <div class="card-header" id="nextDay4"></div>
                             <div class="card-body">
-                                <h5 class="card-title">[Weather Image]</h5>
+                                <h5 class="card-title" id="img4"></h5>
                                 <p class="card-text" id="temp4"></p>
                                 <p class="card-text" id="humidity4"></p>
                             </div>
@@ -92,7 +92,7 @@
                         <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
                             <div class="card-header" id="nextDay5"></div>
                             <div class="card-body">
-                                <h5 class="card-title">[Weather Image]</h5>
+                                <h5 class="card-title" id="img5"></h5>
                                 <p class="card-text" id="temp5"></p>
                                 <p class="card-text" id="humidity5"></p>
                             </div>

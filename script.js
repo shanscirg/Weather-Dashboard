@@ -4,10 +4,14 @@ function convertTemp(tempKelvin) {
     tempF = tempF.toFixed(2);
     return tempF;
 }
+$("#fiveDay").hide();
+$("#cards").hide();
 
 // When city submit button is clicked, 
 $("#submitCity").on("click", function (event) {
     event.preventDefault();
+    $("#fiveDay").show();
+    $("#cards").show();
     const cityChoice = $("#cityChoice").val();
     console.log(cityChoice);
 
@@ -18,7 +22,7 @@ $("#submitCity").on("click", function (event) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        $("#cityName").text(response.name).append(" (" + moment().format('l') + ")");
+        $("#cityName").text(response.name).append(" (" + moment().format('l') + ")").append("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='Weather Icon'>");
         $("#space").append("<hr> <hr>");
         let currentTemp = response.main.temp;
         $("#temp").text("Temperature: " + convertTemp(currentTemp) + " \xB0" + "F");
@@ -46,18 +50,23 @@ $("#submitCity").on("click", function (event) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
+        $("#img1").append("<img src='http://openweathermap.org/img/w/" + response.list[3].weather[0].icon + ".png' alt='Weather Icon'>");
         let currentTemp = response.list[3].main.temp;
         $("#temp1").text("Temp: " + convertTemp(currentTemp) + " \xB0" + "F");
         $("#humidity1").text("Humidity: " + response.list[3].main.humidity + "%");
+        $("#img2").append("<img src='http://openweathermap.org/img/w/" + response.list[11].weather[0].icon + ".png' alt='Weather Icon'>");
         let currentTemp2 = response.list[11].main.temp;
         $("#temp2").text("Temp: " + convertTemp(currentTemp2) + " \xB0" + "F");
         $("#humidity2").text("Humidity: " + response.list[11].main.humidity + "%");
+        $("#img3").append("<img src='http://openweathermap.org/img/w/" + response.list[19].weather[0].icon + ".png' alt='Weather Icon'>");
         let currentTemp3 = response.list[19].main.temp;
         $("#temp3").text("Temp: " + convertTemp(currentTemp3) + " \xB0" + "F");
         $("#humidity3").text("Humidity: " + response.list[19].main.humidity + "%");
+        $("#img4").append("<img src='http://openweathermap.org/img/w/" + response.list[27].weather[0].icon + ".png' alt='Weather Icon'>");
         let currentTemp4 = response.list[27].main.temp;
         $("#temp4").text("Temp: " + convertTemp(currentTemp4) + " \xB0" + "F");
         $("#humidity4").text("Humidity: " + response.list[27].main.humidity + "%");
+        $("#img5").append("<img src='http://openweathermap.org/img/w/" + response.list[35].weather[0].icon + ".png' alt='Weather Icon'>");
         let currentTemp5 = response.list[35].main.temp;
         $("#temp5").text("Temp: " + convertTemp(currentTemp5) + " \xB0" + "F");
         $("#humidity5").text("Humidity: " + response.list[35].main.humidity + "%");
@@ -96,3 +105,8 @@ $("#submitCity").on("click", function (event) {
     generateCity();
 })
 
+
+// when past-searched city is clicked, weather info reappears for that city
+
+// function weatherReappear(){
+// }
