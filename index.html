@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Weather Dashboard</title>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 
 <body>
@@ -18,11 +19,11 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container m-2">
 
         <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <form>
                     <div class="form-group">
                         <label for="citySearch">Search for a City:</label>
@@ -35,15 +36,73 @@
                 </div>
             </div>
 
-            <div class="col-md-8">
-                <div class="row">
-                    <p class="text-center">This will be where current weather results show up!</p>
+            <div class="col-md-9 pl-4">
+                <div class="row border border-primary w-auto h-50">
+                    <h1 class="p-3 w-75" style="height: 5px" id="cityName">&lt;--- Search for a city to see current weather!</h1>
+                    <p class="w-75" style="height: 5px" id="temp"></p>
+                    <p class="w-75" style="height: 5px" id="humidity"></p>
+                    <p class="w-75" style="height: 5px" id="wind"></p>
+                    <p class="w-75" style="height: 5px" id="uvIndex"></p>
+                </div>
+                <div class="row mt-4">
+                    <h1>5-Day Forecast:</h1>
                 </div>
                 <div class="row">
-                    <p class="text-center">5-Day Forecast</p>
+                    <div class="col-md-2.4 p-1">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
+                            <div class="card-header" id="nextDay1"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">[Weather Image]</h5>
+                                <p class="card-text">Temp:</p>
+                                <p class="card-text">Humidity:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2.4 p-1">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
+                            <div class="card-header" id="nextDay2"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">[Weather Image]</h5>
+                                <p class="card-text">Temp:</p>
+                                <p class="card-text">Humidity:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2.4 p-1">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
+                            <div class="card-header" id="nextDay3"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">[Weather Image]</h5>
+                                <p class="card-text">Temp:</p>
+                                <p class="card-text">Humidity:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2.4 p-1">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
+                            <div class="card-header" id="nextDay4"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">[Weather Image]</h5>
+                                <p class="card-text">Temp:</p>
+                                <p class="card-text">Humidity:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2.4 p-1">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 10rem;">
+                            <div class="card-header" id="nextDay5"></div>
+                            <div class="card-body">
+                                <h5 class="card-title">[Weather Image]</h5>
+                                <p class="card-text">Temp:</p>
+                                <p class="card-text">Humidity:</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
