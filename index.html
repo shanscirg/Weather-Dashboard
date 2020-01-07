@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid" id="jumbotron">
         <div class="container">
-            <h1 class="display-4 text-center">Weather Dashboard</h1>
+            <h1 class="display-2 text-center"><strong>Weather Dashboard</strong></h1>
         </div>
     </div>
 
@@ -22,7 +22,8 @@
 
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-3 pr-4" id="left">
+                <br>
                 <form>
                     <div class="form-group">
                         <label for="citySearch">Search for a City:</label>
@@ -36,7 +37,7 @@
 
             <div class="col-md-9 pl-4">
                 <div class="row border border-primary w-auto h-50">
-                    <h1 class="p-3 w-75" style="height: 5px" id="cityName">&lt;--- Search for a city to get weather information!</h1>
+                    <h1 class="p-3 w-75 fontfam" style="height: 5px" id="cityName">&lt;--- Search for a city to get weather information!</h1>
                     <p id="space"></p>
                     <p class="p-3 w-75" style="height: 5px" id="temp"></p>
                     <p class="p-3 w-75" style="height: 5px" id="humidity"></p>
@@ -44,7 +45,7 @@
                     <p class="p-3 w-75" style="height: 5px" id="uvIndex"></p>
                 </div>
                 <div class="row mt-4" id="fiveDay">
-                    <h1>5-Day Forecast:</h1>
+                    <h1 class="fontfam">5-Day Forecast:</h1>
                 </div>
                 <div class="row" id="cards">
                     <div class="col-md-2.4 p-1">

@@ -1,21 +1,41 @@
+// Add background image to jumbotron
+let image = "https://openweathermap.org/themes/openweathermap/assets/img/new-history-forecast-bulk.png"
+$("#jumbotron").css("background-image", "url(" + image + ")");
+
+// Change font style of city and 5-day forecast
+$(".fontfam").css("font-family", "Century");
+
+$("#left").css("background-color", "#EEF2F6");
+
 // Function that converts Kelvin to Fahrenheit
 function convertTemp(tempKelvin) {
     let tempF = (tempKelvin - 273.15) * 1.80 + 32;
     tempF = tempF.toFixed(2);
     return tempF;
 }
+
+// Hide 5-day forecast cards
 $("#fiveDay").hide();
 $("#cards").hide();
 
-// When city submit button is clicked, 
+// add space between city and current weather info
+$("#space").append("<hr><hr>");
+
+let cityChoice = "";
+
+// When city submit button is clicked, show weather and save search
 $("#submitCity").on("click", function (event) {
     event.preventDefault();
     $("#fiveDay").show();
     $("#cards").show();
-    const cityChoice = $("#cityChoice").val();
-    console.log(cityChoice);
+    cityChoice = $("#cityChoice").val();
+    showWeather();
+    showStoredSearches();
+})
 
-    // show current temp info
+// Show weather (current & forecast) info
+function showWeather() {
+    // current weather
     const queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityChoice + "&APPID=c20a03310efa2dbd0d1d7eb369964143";
     $.ajax({
         url: queryURL,
@@ -23,11 +43,11 @@ $("#submitCity").on("click", function (event) {
     }).then(function (response) {
         console.log(response);
         $("#cityName").text(response.name).append(" (" + moment().format('l') + ")").append("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='Weather Icon'>");
-        $("#space").append("<hr> <hr>");
         let currentTemp = response.main.temp;
         $("#temp").text("Temperature: " + convertTemp(currentTemp) + " \xB0" + "F");
         $("#humidity").text("Humidity: " + response.main.humidity + "%");
         $("#wind").text("Wind Speed: " + response.wind.speed + " mph");
+        
         // UV index
         const cityLat = response.coord.lat;
         const cityLon = response.coord.lon;
@@ -39,9 +59,8 @@ $("#submitCity").on("click", function (event) {
             console.log(response)
             $("#uvIndex").text("UV Index: " + response.value);
         })
+
     })
-
-
 
     // 5-day forecast
     const queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityChoice + "&APPID=c20a03310efa2dbd0d1d7eb369964143";
@@ -50,6 +69,11 @@ $("#submitCity").on("click", function (event) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
+        $("#img1").empty();
+        $("#img2").empty();
+        $("#img3").empty();
+        $("#img4").empty();
+        $("#img5").empty();
         $("#img1").append("<img src='http://openweathermap.org/img/w/" + response.list[3].weather[0].icon + ".png' alt='Weather Icon'>");
         let currentTemp = response.list[3].main.temp;
         $("#temp1").text("Temp: " + convertTemp(currentTemp) + " \xB0" + "F");
@@ -71,42 +95,34 @@ $("#submitCity").on("click", function (event) {
         $("#temp5").text("Temp: " + convertTemp(currentTemp5) + " \xB0" + "F");
         $("#humidity5").text("Humidity: " + response.list[35].main.humidity + "%");
     })
-
-});
-
-
-$("#nextDay1").text(moment().add(1, 'days').format('l'));
-$("#nextDay2").text(moment().add(2, 'days').format('l'));
-$("#nextDay3").text(moment().add(3, 'days').format('l'));
-$("#nextDay4").text(moment().add(4, 'days').format('l'));
-$("#nextDay5").text(moment().add(5, 'days').format('l'));
-
-
+    // add dates to 5-day forecast cards
+    $("#nextDay1").text(moment().add(1, 'days').format('l'));
+    $("#nextDay2").text(moment().add(2, 'days').format('l'));
+    $("#nextDay3").text(moment().add(3, 'days').format('l'));
+    $("#nextDay4").text(moment().add(4, 'days').format('l'));
+    $("#nextDay5").text(moment().add(5, 'days').format('l'));
+};
 
 
 // STORE CITIES
 let cityList = JSON.parse(localStorage.getItem('cityList')) || [];
 
 // function that stores cities to local storage and adds each one to the city list
-function generateCity() {
+function showStoredSearches() {
+    console.log("showStoredSearches");
+    cityList.push(cityChoice);
     localStorage.setItem('cityList', JSON.stringify(cityList));
+    console.log("I pushed cityChoice to cityList");
+    let savedCity = $("<button id='savedCity'>" + cityChoice + "</button><p></p>");
+    $("#savedSearches").append(savedCity);
+    savedCity.on('click', function () {
+        console.log('the city was clicked');
+        cityChoice = savedCity.text();
+        console.log(cityChoice);
+        showWeather();
+    })
     for (let i = 0; i < cityList.length; i++) {
         let currentCity = cityList[i];
         console.log(currentCity);
-        $("#savedSearches").prepend("<br><hr>" + currentCity);
     }
 }
-
-// when city is submitted, store it into an object and push into cityList
-$("#submitCity").on("click", function (event) {
-    event.preventDefault();
-    let newCity = $("#cityChoice").val();
-    cityList.push(newCity);
-    generateCity();
-})
-
-
-// when past-searched city is clicked, weather info reappears for that city
-
-// function weatherReappear(){
-// }
