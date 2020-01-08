@@ -6,5 +6,5 @@ The purpose of this application is to show weather information for a specific ci
 Link to application:
 [Weather-Dashboard](https://shanscirg.github.io/Weather-Dashboard/)
 
-Screenshots of application:
+Screenshot of application:
 ![screenshot](/images/screenshot.png)
