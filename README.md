@@ -7,3 +7,4 @@ Link to application:
 [Weather-Dashboard](https://shanscirg.github.io/Weather-Dashboard/)
 
 Screenshots of application:
+![screenshot](/images/screenshot.png)
