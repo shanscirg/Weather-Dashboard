@@ -51,7 +51,7 @@ function showWeather() {
         // UV index
         const cityLat = response.coord.lat;
         const cityLon = response.coord.lon;
-        const queryURL3 = "http://api.openweathermap.org/data/2.5/uvi?appid=c20a03310efa2dbd0d1d7eb369964143&lat=" + cityLat + "&lon=" + cityLon;
+        const queryURL3 = "https://api.openweathermap.org/data/2.5/uvi?appid=c20a03310efa2dbd0d1d7eb369964143&lat=" + cityLat + "&lon=" + cityLon;
         $.ajax({
             url: queryURL3,
             method: "GET"
