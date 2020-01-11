@@ -4,7 +4,6 @@ $("#jumbotron").css("background-image", "url(" + image + ")");
 
 // Change font style of city and 5-day forecast
 $(".fontfam").css("font-family", "Century");
-
 $("#left").css("background-color", "#EEF2F6");
 
 // Function that converts Kelvin to Fahrenheit
@@ -21,48 +20,85 @@ $("#cards").hide();
 // add space between city and current weather info
 $("#space").append("<hr><hr>");
 
-let cityChoice = "";
+// let cityChoice = "";
+
+
+
+
+//STORE CITIES
+// function that stores cities to local storage and adds each one to the city list
+function showStoredSearches() {
+    console.log("showStoredSearches");
+    const cityList = JSON.parse(localStorage.getItem('cityList')) || [];
+    const cityChoice = $("#cityChoice").val();
+    console.log('citychoice', cityChoice)
+    console.log('includes?', cityList.includes(cityChoice));
+    if(!cityList.includes(cityChoice) && cityChoice !== "") {
+        cityList.push(cityChoice)
+        localStorage.setItem('cityList', JSON.stringify(cityList));
+    }
+    $("#savedSearches").empty();
+    for (let i = 0; i < cityList.length; i++) {
+        let currentCity = cityList[i];
+        console.log(currentCity);
+        let savedCity = $("<button type='button' class='savedCity'>" + currentCity + "</button><p></p>");
+        console.log(savedCity);
+        $("#savedSearches").prepend(savedCity);
+    }
+
+}
+
+$("#savedSearches").on('click', '.savedCity', function () {
+    console.log('the city was clicked');
+    $("#fiveDay").show();
+    $("#cards").show();
+    const cityChoice = $(this).text();
+    console.log(cityChoice);
+    showWeather(cityChoice);
+})
 
 // When city submit button is clicked, show weather and save search
 $("#submitCity").on("click", function (event) {
     event.preventDefault();
     $("#fiveDay").show();
     $("#cards").show();
-    cityChoice = $("#cityChoice").val();
-    showWeather();
+    const cityChoice = $("#cityChoice").val();
+    showWeather(cityChoice);
     showStoredSearches();
 })
 
+
+
 // Show weather (current & forecast) info
-function showWeather() {
+function showWeather(cityChoice) {
+
     // current weather
     const queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityChoice + "&APPID=c20a03310efa2dbd0d1d7eb369964143";
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
         $("#cityName").text(response.name).append(" (" + moment().format('l') + ")").append("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='Weather Icon'>");
         let currentTemp = response.main.temp;
         $("#temp").text("Temperature: " + convertTemp(currentTemp) + " \xB0" + "F");
         $("#humidity").text("Humidity: " + response.main.humidity + "%");
         $("#wind").text("Wind Speed: " + response.wind.speed + " mph");
-        
+
         // UV index
         const cityLat = response.coord.lat;
         const cityLon = response.coord.lon;
-        const queryURL3 = "https://api.openweathermap.org/data/2.5/uvi?appid=c20a03310efa2dbd0d1d7eb369964143&lat=" + cityLat + "&lon=" + cityLon;
+        const queryURL3 = "http://api.openweathermap.org/data/2.5/uvi?appid=c20a03310efa2dbd0d1d7eb369964143&lat=" + cityLat + "&lon=" + cityLon;
         $.ajax({
             url: queryURL3,
             method: "GET"
         }).then(function (response) {
-            console.log(response)
             $("#uvIndex").text("UV Index: " + response.value);
         })
 
+    }).catch(function (error) {
+        alert("City cannot be found. Please try again!")
+        console.log(error);
     })
-
-    // 5-day forecast
     const queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityChoice + "&APPID=c20a03310efa2dbd0d1d7eb369964143";
     $.ajax({
         url: queryURL2,
@@ -95,6 +131,8 @@ function showWeather() {
         $("#temp5").text("Temp: " + convertTemp(currentTemp5) + " \xB0" + "F");
         $("#humidity5").text("Humidity: " + response.list[35].main.humidity + "%");
     })
+
+    // 5-day forecast
     // add dates to 5-day forecast cards
     $("#nextDay1").text(moment().add(1, 'days').format('l'));
     $("#nextDay2").text(moment().add(2, 'days').format('l'));
@@ -105,24 +143,9 @@ function showWeather() {
 
 
 // STORE CITIES
-let cityList = JSON.parse(localStorage.getItem('cityList')) || [];
 
-// function that stores cities to local storage and adds each one to the city list
-function showStoredSearches() {
-    console.log("showStoredSearches");
-    cityList.push(cityChoice);
-    localStorage.setItem('cityList', JSON.stringify(cityList));
-    console.log("I pushed cityChoice to cityList");
-    let savedCity = $("<button id='savedCity'>" + cityChoice + "</button><p></p>");
-    $("#savedSearches").append(savedCity);
-    savedCity.on('click', function () {
-        console.log('the city was clicked');
-        cityChoice = savedCity.text();
-        console.log(cityChoice);
-        showWeather();
-    })
-    for (let i = 0; i < cityList.length; i++) {
-        let currentCity = cityList[i];
-        console.log(currentCity);
-    }
-}
+
+
+$(document).ready(function () {
+    showStoredSearches();
+});
